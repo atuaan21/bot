@@ -27,7 +27,7 @@ const loadFilesAsync = async (directory, collection) => {
             const module = require(filePath);
 
             if ('data' in module && 'execute' in module) {
-                console.log(`Loaded ${folder}:`, module.data.name);
+                console.log(`Loaded${folder}: ${module.data.name}`);
                 collection.set(module.data.name, module);
             } else {
                 console.log(`[WARNING] The ${folder} at ${filePath} is missing a required "data" or "execute" property.`);
@@ -45,7 +45,7 @@ const loadEvents = (directory, target) => {
     for (const file of files) {
         const filePath = path.join(directory, file);
         const event = require(filePath);
-        console.log(`Loaded ${event?.type}:`, event.name);
+        console.log(`Loaded ${event?.type}: ${event.name}`);
         target.on(event.name, (...args) => event.execute(...args));
     }
 };
